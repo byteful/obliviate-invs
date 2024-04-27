@@ -19,6 +19,8 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.SkullUtils;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
@@ -140,10 +142,13 @@ public class ItemStackSerializer {
         if (section.isSet(table.getDurabilitySectionName()))
             item.setDurability((short) section.getInt(table.getDurabilitySectionName()));
         if (section.getBoolean(table.getGlowSectionName())) {
-            meta.getItemFlags().add(ItemFlag.HIDE_ENCHANTS);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             if (meta.getEnchants().isEmpty()) {
                 meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
             }
+        }
+        if (item.getType() == Material.PLAYER_HEAD && section.contains("texture")) {
+            meta = SkullUtils.applySkin(meta, section.getString("texture"));
         }
         item.setItemMeta(meta);
 
