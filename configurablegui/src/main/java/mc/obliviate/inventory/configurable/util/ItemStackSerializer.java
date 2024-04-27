@@ -21,6 +21,7 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.SkullUtils;
+import org.bukkit.Material;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
