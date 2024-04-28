@@ -7,7 +7,7 @@ plugins {
 
 group 'mc.obliviate'
 version '4.1.13.1'
-sourceCompatibility = 8
+sourceCompatibility = 17
 compileJava.options.encoding = 'UTF-8'
 
 tasks.jar {
@@ -22,7 +22,7 @@ subprojects {
 
     group rootProject.group
     version rootProject.version
-    sourceCompatibility = 8
+    sourceCompatibility = 17
     compileJava.options.encoding = 'UTF-8'
 
     repositories {
