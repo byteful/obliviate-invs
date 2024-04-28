@@ -1,10 +1,13 @@
 package mc.obliviate.inventory.configurable.util;
 
+import com.destroystokyo.paper.profile.PlayerProfile;
+import com.destroystokyo.paper.profile.ProfileProperty;
 import com.google.common.base.Preconditions;
 import mc.obliviate.inventory.configurable.GuiConfigurationTable;
 import mc.obliviate.util.placeholder.PlaceholderUtil;
 import mc.obliviate.util.string.StringUtil;
 import mc.obliviate.util.versiondetection.ServerVersionController;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -26,12 +29,7 @@ import org.bukkit.Material;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class ItemStackSerializer {
 
@@ -149,7 +147,10 @@ public class ItemStackSerializer {
             }
         }
         if (item.getType() == Material.PLAYER_HEAD && section.contains("texture")) {
-            meta = SkullUtils.applySkin(meta, section.getString("texture"));
+          PlayerProfile profile = Bukkit.createProfile(UUID.randomUUID());
+          profile.clearProperties();
+          profile.getProperties().add(new ProfileProperty("textures", section.getString("texture")));
+          ((SkullMeta) meta).setPlayerProfile(profile);
         }
         item.setItemMeta(meta);
 
